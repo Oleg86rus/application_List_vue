@@ -1,1 +1,0 @@
-export const ID_TOKEN = 'AIzaSyDH5LSXNBXCu_3JAjsHva3VTLf4D4PfJZk'

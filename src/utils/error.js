@@ -6,3 +6,4 @@ const ERROR_CODES = {
 export function error(code) {
 	return ERROR_CODES[code] ? ERROR_CODES[code] : 'Неизвестная ошибка'
 }
+export const ID_TOKEN = 'AIzaSyDH5LSXNBXCu_3JAjsHva3VTLf4D4PfJZk'

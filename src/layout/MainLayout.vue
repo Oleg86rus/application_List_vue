@@ -1,6 +1,7 @@
 <template>
   <the-navbar></the-navbar>
   <div class="container with-nav">
+    <app-message></app-message>
     <router-view></router-view>
 
   </div>
@@ -8,10 +9,11 @@
 
 <script>
 import TheNavbar from '../components/TheNavbar.vue'
+import AppMessage from '@/components/ui/AppMessage.vue'
 
 export default {
   name: 'MainLayout',
-  components: {TheNavbar}
+  components: { AppMessage, TheNavbar}
 }
 </script>
 

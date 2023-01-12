@@ -1,6 +1,6 @@
 <template>
   <h4 v-if="requests.length === 0" class="text-center">Заявок пока нет</h4>
-  <table v-if="requests.length !== 0">
+  <table  class="table">
     <thead>
     <tr>
       <th>#</th>
@@ -12,12 +12,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr v-for="(r, idx) in requests" :key="r.id">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ r.fio }}</td>
+      <td>{{ r.phone }}</td>
+      <td>{{ currency(r.amount) }}</td>
+      <td><AppStatus :type="r.status" /></td>
+      <td>
+        <router-link v-slot="{navigate}" custom :to="{name: 'Request', params: {id: r.id}}" >
+          <button class="btn" @click="navigate">Открыть</button>
+        </router-link>
+      </td>
       <td></td>
     </tr>
     </tbody>
@@ -25,9 +30,16 @@
 </template>
 
 <script>
+import { currency } from '@/utils/currency'
+import AppStatus from '@/components/ui/AppStatus.vue'
+
 export default {
   name: 'RequestTable',
-  props: ['requests']
+  props: ['requests'],
+  components: {AppStatus},
+  setup() {
+    return {currency}
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 import axios from '../../axios/request'
-import store from '@/store'
+import store from '../index'
 
 export default {
 	namespaced: true,
@@ -32,10 +32,24 @@ export default {
 					type: 'danger'
 				}, {root: true})
 			}
+		},
+		async load({commit, dispatch}) {
+			try {
+				const token = store.getters['auth/token']
+				const {data} = await axios.get(`/requests.json?auth=${token}`)
+				const requests = Object.keys(data).map(id => ({...data[id], id}))
+				console.log(requests)
+				commit('setRequests', requests)
+			} catch (e) {
+				dispatch('setMessage', {
+					value: e.message,
+					type: 'danger'
+				}, {root: true})
+			}
 		}
 	},
 	getters: {
-		request(state) {
+		requests(state) {
 			return state.requests
 		}
 	}

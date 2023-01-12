@@ -1,6 +1,6 @@
 <template>
-  <h4 v-if="!requests" class="text-center">Заявок пока нет</h4>
-  <table v-if="requests">
+  <h4 v-if="requests.length === 0" class="text-center">Заявок пока нет</h4>
+  <table  class="table">
     <thead>
     <tr>
       <th>#</th>
@@ -12,12 +12,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr v-for="(r, idx) in requests" :key="r.id">
+      <td>{{ idx + 1 }}</td>
+      <td>{{ r.fio }}</td>
+      <td>{{ r.phone }}</td>
+      <td>{{ r.amount }}</td>
+      <td>{{ r.status }}</td>
+      <td>
+        <router-link v-slot="{navigate}" custom to="{name: 'Request', params: {id: r.id}}" >
+          <button class="btn primary" @click="navigate">Открыть</button>
+        </router-link>
+      </td>
       <td></td>
     </tr>
     </tbody>
@@ -27,7 +32,7 @@
 <script>
 export default {
   name: 'RequestTable',
-  props: ['requests']
+  props: ['requests'],
 }
 </script>
 

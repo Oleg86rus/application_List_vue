@@ -27,6 +27,7 @@
         <option value="pending">Выполняется</option>
       </select>
     </div>
+
     <button class="btn primary" :disabled="isSubmitting">Создать</button>
   </form>
 </template>

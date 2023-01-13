@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export default {
   name: 'AppStatus',
@@ -27,6 +27,12 @@ export default {
       done: 'Завершен',
       pending: 'Выполняется'
     }
+
+    watch(props, val => {
+      className.value = classesMap[val.type]
+      text.value = textMap[val.type]
+    })
+
     const className = ref(classesMap[props.type])
     const text = ref(textMap[props.type])
     return {
